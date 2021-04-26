@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { Component } from "react";
+import MyComponent from "./components/MyComponent";
+import MyInput from "./components/MyInput";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      showButton: false,
+    };
+  }
+
+  toggleButton() {
+    this.setState({ showButton: !this.state.showButton });
+  };
+
+  render() {
+    const { showButton } = this.state;
+    return (
+      <div>
+        <button onClick={() => this.toggleButton()}>click me</button>
+        { showButton ? <MyComponent text="edit me" /> : <MyInput value={this.state.value} /> }
+      </div>
+    )
+  }
 }
 
 export default App;
