@@ -1,26 +1,35 @@
 import React, { Component } from "react";
 import MyComponent from "./components/MyComponent";
-import MyInput from "./components/MyInput";
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      showButton: false,
-    };
   }
 
-  toggleButton() {
-    this.setState({ showButton: !this.state.showButton });
-  };
-
   render() {
-    const { showButton } = this.state;
     return (
       <div>
-        <button onClick={() => this.toggleButton()}>click me</button>
-        { showButton ? <MyComponent text="edit me" /> : <MyInput value={this.state.value} /> }
+        <div className="generalDiv">
+          <h2>General Info</h2>
+          <MyComponent title="Full Name:" placeHolder="Full Name" />
+          <MyComponent title="Email:" placeHolder="username@domain.com" />
+          <MyComponent title="Phone Number: " placeHolder="123-456-7890" />
+        </div>
+
+        <div className="schoolDiv">
+          <h2>Education Experience</h2>
+          <MyComponent title="School Name:" placeHolder="Full School Name" />
+          <MyComponent title="Degree:" placeHolder="Title of Degree" />
+          <MyComponent title="Date of Study:" placeHolder="MM/YYYY - MM/YYYY" />
+        </div>
+
+        <div className="workDiv">
+          <h2>Work Experience</h2>
+          <MyComponent title="Company Name:" placeHolder="Company Name" />
+          <MyComponent title="Job Position:" placeHolder="Your job position" />
+          <MyComponent title="Date of Work:" placeHolder="MM/YYYY - MM/YYYY" />
+        </div>
       </div>
     )
   }

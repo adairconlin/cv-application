@@ -2,30 +2,44 @@ import React, { Component } from "react";
 
 class MyComponent extends Component {
     constructor(props){
-        super(props); 
-
-        this.toggleClass = this.toggleClass.bind(this);
+        super(props);
         this.state = {
-          active: false,
-        };
+            value: '',
+            text: '',
+            active: false,
+          };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.toggleClass = this.toggleClass.bind(this);
     }
 
-    toggleClass(e) {
+    toggleClass() {
         const currentState = this.state.active;
         this.setState({active: !currentState});
-        const divClass = e.target.parentNode.className;
-        if(divClass != "active") {
-            console.log("not active")
-        }
-    };
+      }
+    
+      handleChange(event) {
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+        this.setState({text: this.state.value});
+        event.preventDefault();
+        this.toggleClass();
+      }
 
-    render(){
-        const { text } = this.props;
-        const { active } = this.state;
-        return(
-            <div className={active ? 'active' : null}
-            onClick={this.toggleClass}>
-                <p>{text}</p>
+    render() {
+        const { text, value, } = this.state;
+        const { title, placeHolder } = this.props;
+        return (
+            <div>
+                <h4>{title}</h4>
+                <form onSubmit={this.handleSubmit} className={this.state.active ? 'active' : null}>
+                    <input placeholder={placeHolder} type="text" value={value} onChange={this.handleChange} />
+                    <input type="submit" value="Submit" />
+                </form>
+                <p onClick={this.toggleClass} className={this.state.active ? null : 'active'}>{text}</p>
             </div>
         )
     }
